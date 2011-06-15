@@ -1,0 +1,5 @@
+name: ServerSave
+main: me.krotn.ServerSave.ServerSave
+version: 0.1
+author: Krotn
+commands:
