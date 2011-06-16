@@ -1,5 +1,5 @@
 name: ServerSave
 main: me.krotn.ServerSave.ServerSave
-version: 0.1
+version: 1.0
 author: Krotn
 commands:
