@@ -49,6 +49,12 @@ public class SSPropertiesManager {
 	 */
 	private void setupDefaults(){
 		defaults.put("saveFrequency", "600");
+		defaults.put("startNotification", "Starting world save!");
+		defaults.put("endNotification","Save Complete!");
+		defaults.put("startColor","red");
+		defaults.put("endColor","red");
+		defaults.put("printToConsole", "true");
+		defaults.put("saveIfNoPlayers","false");
 	}
 	
 	/**
