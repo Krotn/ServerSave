@@ -20,9 +20,9 @@ public class ServerSaveTask implements Runnable{
 		if(running){
 			return; //No simultaneous saves!
 		}
-		boolean outputToConsole = new Boolean(propMan.getProperty("printToConsole")).booleanValue();
-		running = true;
 		try{
+			running = true;
+			boolean outputToConsole = new Boolean(propMan.getProperty("printToConsole")).booleanValue();
 			String chatColorString = ChatColor.valueOf(propMan.getProperty("startColor").toUpperCase()).toString();
 			String startNotification = propMan.getProperty("startNotification");
 			Player[] players = server.getOnlinePlayers();
