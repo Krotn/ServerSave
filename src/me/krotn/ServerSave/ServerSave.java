@@ -16,7 +16,7 @@ public class ServerSave extends JavaPlugin{
 		taskMan = new SSTaskManager(this,this.getServer().getScheduler());;
 		logMan.info("Save interval is: "+propMan.getProperty("saveFrequency")+" seconds.");
 		long time = new Long(propMan.getProperty("saveFrequency")).longValue();
-		taskMan.scheduleRepeatingTask(new ServerSaveTask(this,this.getServer()), time, time);
+		taskMan.scheduleSyncRepeatingTask(new ServerSaveTask(this,this.getServer()), time, time);
 		logMan.info("ServerSave enabled!");
 	}
 	

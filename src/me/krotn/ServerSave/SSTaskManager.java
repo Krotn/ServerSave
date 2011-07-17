@@ -24,8 +24,8 @@ public class SSTaskManager {
 		return Math.round(seconds*ticksPerSecond);
 	}
 	
-	public int scheduleRepeatingTask(Runnable task,long delayToStart,long period){
-		int taskID = scheduler.scheduleAsyncRepeatingTask(this.plugin, task, secsInTicks(delayToStart), secsInTicks(period));
+	public int scheduleSyncRepeatingTask(Runnable task,long delayToStart,long period){
+		int taskID = scheduler.scheduleSyncRepeatingTask(this.plugin, task, secsInTicks(delayToStart), secsInTicks(period));
 		if(taskID!=-1){
 			tasks.add(taskID);
 		}
