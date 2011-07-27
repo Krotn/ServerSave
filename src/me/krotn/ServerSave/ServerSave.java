@@ -10,6 +10,7 @@ public class ServerSave extends JavaPlugin{
 	private SSTaskManager taskMan = null;
 	private ServerSaveTask saveTask = null;
 	private boolean useWarnings = false;
+	private SSWarningSaveTask warnTask = null;
 	
 	public void onEnable(){
 		if(!SSDirectoryManager.directoryExists()){
@@ -24,7 +25,9 @@ public class ServerSave extends JavaPlugin{
 			taskMan.scheduleSyncRepeatingTask(saveTask, saveTime, saveTime);
 		}
 		else{
-			//Add warning code here!
+			long warnTime = new Long(propMan.getProperty("warningTime")).longValue();
+			warnTask = new SSWarningSaveTask(this,saveTask,saveTime,warnTime);
+			warnTask.start();
 		}
 		logMan.info("ServerSave enabled!");
 	}
