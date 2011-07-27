@@ -41,4 +41,8 @@ public class ServerSave extends JavaPlugin{
 	public SSLogManager getLogManager(){
 		return logMan;
 	}
+	
+	public SSTaskManager getTaskManager(){
+		return taskMan;
+	}
 }
