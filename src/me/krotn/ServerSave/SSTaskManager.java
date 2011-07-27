@@ -26,16 +26,21 @@ public class SSTaskManager {
 	
 	public int scheduleSyncRepeatingTask(Runnable task,long delayToStart,long period){
 		int taskID = scheduler.scheduleSyncRepeatingTask(this.plugin, task, secsInTicks(delayToStart), secsInTicks(period));
-		if(taskID!=-1){
-			tasks.add(taskID);
-		}
+		return taskID;
+	}
+	
+	public int scheduleAsyncTask(Runnable task,long delayToStart){
+		int taskID = scheduler.scheduleAsyncDelayedTask(this.plugin, task, secsInTicks(delayToStart));
+		return taskID;
+	}
+	
+	public int scheduleSyncImmediateTask(Runnable task){
+		int taskID = scheduler.scheduleSyncDelayedTask(this.plugin, task);
 		return taskID;
 	}
 	
 	public void removeAllTasks(){
-		for(Integer taskID:tasks){
-			scheduler.cancelTask(taskID);
-		}
+		scheduler.cancelTasks(this.plugin);
 		tasks.clear();
 	}
 }
