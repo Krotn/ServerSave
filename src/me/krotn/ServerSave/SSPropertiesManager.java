@@ -55,6 +55,10 @@ public class SSPropertiesManager {
 		defaults.put("endColor","red");
 		defaults.put("printToConsole", "true");
 		defaults.put("saveIfNoPlayers","false");
+		defaults.put("warnBeforeSave", "false");
+		defaults.put("warningTime", "30");
+		defaults.put("warningNotification","30 seconds to world save!");
+		defaults.put("warningColor", "red");
 	}
 	
 	/**
