@@ -1,5 +1,7 @@
 package me.krotn.ServerSave;
 
+import org.bukkit.ChatColor;
+
 public class SSWarningSaveTask implements Runnable{
 	private ServerSave plugin = null;
 	private SSPropertiesManager propMan = null;
@@ -22,10 +24,26 @@ public class SSWarningSaveTask implements Runnable{
 	}
 	
 	public void scheduleSelf(){
-		
+		long delayToStart = this.saveTime-this.warningTime;
+		this.taskMan.scheduleAsyncTask(this, delayToStart);
+	}
+	
+	public void rescheduleSelf(){
+		long delayToStart = this.saveTime;
+		this.taskMan.scheduleAsyncTask(this, delayToStart);
+	}
+	
+	public void scheduleSaveTask(){
+		long delayToStart = this.warningTime;
+		this.taskMan.scheduleSyncTask(this.saveTask,delayToStart);
 	}
 	
 	public void run(){
-		
+		//Called when it's warning time!
+		String warningText = propMan.getProperty("warningNotification");
+		String warningColorString = ChatColor.valueOf(propMan.getProperty("warningColor").toUpperCase()).toString();
+		this.plugin.getServer().broadcastMessage(warningColorString+warningText);
+		rescheduleSelf();
+		scheduleSaveTask();
 	}
 }
