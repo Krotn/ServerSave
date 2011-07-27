@@ -1,6 +1,7 @@
 package me.krotn.ServerSave;
 
 import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 
 public class SSWarningSaveTask implements Runnable{
 	private ServerSave plugin = null;
@@ -43,7 +44,12 @@ public class SSWarningSaveTask implements Runnable{
 		String warningText = propMan.getProperty("warningNotification");
 		String warningColorString = ChatColor.valueOf(propMan.getProperty("warningColor").toUpperCase()).toString();
 		this.plugin.getServer().broadcastMessage(warningColorString+warningText);
-		rescheduleSelf();
+		Player[] players = this.plugin.getServer().getOnlinePlayers();
+		boolean outputToConsole = new Boolean(propMan.getProperty("printToConsole")).booleanValue();
+		if(outputToConsole && (players.length > 0)){
+			this.plugin.getLogManager().info(warningText);
+		}
 		scheduleSaveTask();
+		rescheduleSelf();
 	}
 }
