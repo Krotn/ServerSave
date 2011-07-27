@@ -8,6 +8,8 @@ public class ServerSave extends JavaPlugin{
 	private SSLogManager logMan = new SSLogManager(Logger.getLogger("Minecraft"));
 	private SSPropertiesManager propMan = new SSPropertiesManager();
 	private SSTaskManager taskMan = null;
+	private ServerSaveTask saveTask = null;
+	private boolean useWarnings = false;
 	
 	public void onEnable(){
 		if(!SSDirectoryManager.directoryExists()){
@@ -15,8 +17,15 @@ public class ServerSave extends JavaPlugin{
 		}
 		taskMan = new SSTaskManager(this,this.getServer().getScheduler());;
 		logMan.info("Save interval is: "+propMan.getProperty("saveFrequency")+" seconds.");
-		long time = new Long(propMan.getProperty("saveFrequency")).longValue();
-		taskMan.scheduleSyncRepeatingTask(new ServerSaveTask(this,this.getServer()), time, time);
+		long saveTime = new Long(propMan.getProperty("saveFrequency")).longValue();
+		saveTask = new ServerSaveTask(this,this.getServer());
+		useWarnings = new Boolean(propMan.getProperty("warnBeforeSave"));
+		if(!useWarnings){
+			taskMan.scheduleSyncRepeatingTask(saveTask, saveTime, saveTime);
+		}
+		else{
+			//Add warning code here!
+		}
 		logMan.info("ServerSave enabled!");
 	}
 	
