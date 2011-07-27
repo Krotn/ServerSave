@@ -17,6 +17,14 @@ public class SSWarningSaveTask implements Runnable{
 		this.warningTime = warningTime;
 	}
 	
+	public void start(){
+		scheduleSelf();
+	}
+	
+	public void scheduleSelf(){
+		
+	}
+	
 	public void run(){
 		
 	}
