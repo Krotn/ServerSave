@@ -39,6 +39,11 @@ public class SSTaskManager {
 		return taskID;
 	}
 	
+	public int scheduleSyncTask(Runnable task,long delayToStart){
+		int taskID = scheduler.scheduleSyncDelayedTask(this.plugin, task, secsInTicks(delayToStart));
+		return taskID;
+	}
+	
 	public void removeAllTasks(){
 		scheduler.cancelTasks(this.plugin);
 		tasks.clear();
