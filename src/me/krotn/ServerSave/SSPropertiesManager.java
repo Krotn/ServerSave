@@ -9,6 +9,10 @@ import java.util.Hashtable;
 import java.util.Properties;
 import java.util.logging.Logger;
 
+/**
+ * This class handles the properties for the ServerSave plugin.
+ *
+ */
 public class SSPropertiesManager {
 	private static final String defaultPropertiesName = "config.properties";
 	private String propertiesName;
