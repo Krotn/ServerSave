@@ -4,7 +4,7 @@ import java.util.logging.Logger;
 
 public class SSLogManager {
 	private Logger log;
-	private String prefix = "ServerSave: ";
+	private String prefix = "[ServerSave] ";
 	
 	/**
 	 * Constructs a {@code RentLogManager} that uses the specified {@code Logger}
