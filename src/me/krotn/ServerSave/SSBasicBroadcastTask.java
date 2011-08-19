@@ -18,6 +18,7 @@ public class SSBasicBroadcastTask implements Runnable{
 		this.text = broadcastText;
 		this.server = server;
 		this.logText = logText;
+		this.logMan = logMan;
 	}
 	
 	public void run(){
