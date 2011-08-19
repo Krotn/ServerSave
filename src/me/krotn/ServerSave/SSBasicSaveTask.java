@@ -10,6 +10,10 @@ public class SSBasicSaveTask implements Runnable{
 	}
 	
 	public void run(){
-		this.saveWorld.save();
+		try{
+			this.saveWorld.save();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 }

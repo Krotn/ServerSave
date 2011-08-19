@@ -12,6 +12,10 @@ public class SSBasicBroadcastTask implements Runnable{
 	}
 	
 	public void run(){
-		this.server.broadcastMessage(this.text);
+		try{
+			this.server.broadcastMessage(this.text);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 }
