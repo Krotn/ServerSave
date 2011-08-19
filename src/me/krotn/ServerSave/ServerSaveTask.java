@@ -34,8 +34,10 @@ public class ServerSaveTask implements Runnable{
 			if(outputToConsole){
 				plugin.getLogManager().info("Starting Save!");
 			}
+			long ticks = 1;
 			for(World world:server.getWorlds()){
-				world.save();
+				this.plugin.getTaskManager().scheduleSyncTaskDirect(new SSBasicSaveTask(world),ticks);
+				ticks++;
 			}
 			plugin.getServer().savePlayers();
 			chatColorString = ChatColor.valueOf(propMan.getProperty("endColor").toUpperCase()).toString();
