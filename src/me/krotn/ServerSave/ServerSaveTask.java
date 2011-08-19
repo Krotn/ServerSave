@@ -9,7 +9,6 @@ public class ServerSaveTask implements Runnable{
 	private ServerSave plugin;
 	private Server server;
 	private SSPropertiesManager propMan;
-	private boolean running = false;
 	
 	public ServerSaveTask(ServerSave plugin,Server server){
 		this.plugin = plugin;
@@ -17,11 +16,7 @@ public class ServerSaveTask implements Runnable{
 		this.propMan = plugin.getPropertiesManager();
 	}
 	public void run() {
-		if(running){
-			return; //No simultaneous saves!
-		}
 		try{
-			running = true;
 			boolean outputToConsole = new Boolean(propMan.getProperty("printToConsole")).booleanValue();
 			String chatColorString = ChatColor.valueOf(propMan.getProperty("startColor").toUpperCase()).toString();
 			String startNotification = propMan.getProperty("startNotification");
@@ -31,7 +26,6 @@ public class ServerSaveTask implements Runnable{
 				if(outputToConsole){
 					plugin.getLogManager().info("No players, not saving.");
 				}
-				running=false;
 				return;
 			}
 			if(!startNotification.isEmpty()){
@@ -55,10 +49,7 @@ public class ServerSaveTask implements Runnable{
 		}catch(Exception e){
 			plugin.getLogManager().warning("Problem performing world save!");
 			e.printStackTrace();
-		}finally{
-			running = false;
 		}
-		running = false;
 	}
 
 }
