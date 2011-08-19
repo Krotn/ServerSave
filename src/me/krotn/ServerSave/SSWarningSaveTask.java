@@ -41,6 +41,8 @@ public class SSWarningSaveTask implements Runnable{
 	
 	public void run(){
 		//Called when it's warning time!
+		scheduleSaveTask();
+		rescheduleSelf();
 		String warningText = propMan.getProperty("warningNotification");
 		String warningColorString = ChatColor.valueOf(propMan.getProperty("warningColor").toUpperCase()).toString();
 		this.plugin.getServer().broadcastMessage(warningColorString+warningText);
@@ -49,7 +51,5 @@ public class SSWarningSaveTask implements Runnable{
 		if(outputToConsole && (players.length > 0)){
 			this.plugin.getLogManager().info(warningText);
 		}
-		scheduleSaveTask();
-		rescheduleSelf();
 	}
 }
