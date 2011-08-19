@@ -49,7 +49,7 @@ public class SSWarningSaveTask implements Runnable{
 		Player[] players = this.plugin.getServer().getOnlinePlayers();
 		boolean outputToConsole = new Boolean(propMan.getProperty("printToConsole")).booleanValue();
 		if(outputToConsole && (players.length > 0)){
-			this.plugin.getLogManager().info(warningText);
+			this.plugin.getLogManager().info("Save warning!");
 		}
 	}
 }
