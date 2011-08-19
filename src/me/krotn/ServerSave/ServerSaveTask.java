@@ -39,14 +39,20 @@ public class ServerSaveTask implements Runnable{
 				this.plugin.getTaskManager().scheduleSyncTaskDirect(new SSBasicSaveTask(world),ticks);
 				ticks++;
 			}
-			plugin.getServer().savePlayers();
+			this.plugin.getTaskManager().scheduleSyncTaskDirect(new SSBasicPlayerSaveTask(this.plugin.getServer()),ticks);
+			ticks++;
 			chatColorString = ChatColor.valueOf(propMan.getProperty("endColor").toUpperCase()).toString();
 			String endNotification = propMan.getProperty("endNotification");
 			if(!endNotification.isEmpty()){
-				server.broadcastMessage(chatColorString+endNotification);
-			}
-			if(outputToConsole){
-				plugin.getLogManager().info("Save complete!");
+				String endText = chatColorString+endNotification;
+				if(outputToConsole){
+					this.plugin.getTaskManager().scheduleAsyncTaskDirect(new SSBasicBroadcastTask(endText,"Save complete!",this.plugin.getLogManager(),this.plugin.getServer()),ticks);
+				}
+				else{
+					this.plugin.getTaskManager().scheduleAsyncTaskDirect(new SSBasicBroadcastTask(endText,this.plugin.getServer()), ticks);
+				}
+				this.plugin.getTaskManager().scheduleAsyncTaskDirect(new SSBasicBroadcastTask(endText,this.plugin.getServer()),ticks);
+				ticks++;
 			}
 		}catch(Exception e){
 			plugin.getLogManager().warning("Problem performing world save!");
