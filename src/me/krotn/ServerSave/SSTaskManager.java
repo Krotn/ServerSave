@@ -9,7 +9,6 @@ public class SSTaskManager {
 	private BukkitScheduler scheduler;
 	private ServerSave plugin;
 	
-	private ArrayList<Integer> tasks = new ArrayList<Integer>();
 	
 	public SSTaskManager(ServerSave plugin, BukkitScheduler scheduler){
 		this.plugin = plugin;
@@ -46,6 +45,5 @@ public class SSTaskManager {
 	
 	public void removeAllTasks(){
 		scheduler.cancelTasks(this.plugin);
-		tasks.clear();
 	}
 }
