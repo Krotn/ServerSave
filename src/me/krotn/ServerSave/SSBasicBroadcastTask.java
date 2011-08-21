@@ -23,9 +23,13 @@ public class SSBasicBroadcastTask implements Runnable{
 	
 	public void run(){
 		try{
-			this.server.broadcastMessage(this.text);
+			if(!(this.text.isEmpty())){
+				this.server.broadcastMessage(this.text);
+			}
 			if(!(this.logText==null)){
-				this.logMan.info(this.logText);
+				if(!this.logText.isEmpty()){
+					this.logMan.info(this.logText);
+				}
 			}
 		}catch(Exception e){
 			e.printStackTrace();
