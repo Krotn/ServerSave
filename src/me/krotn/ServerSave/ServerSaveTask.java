@@ -84,7 +84,7 @@ public class ServerSaveTask implements Runnable{
 			}
 		}catch(Exception e){
 			//Catch all exceptions.
-			plugin.getLogManager().warning("Problem performing world save!");
+			plugin.getLogManager().warning("Problem setting up world save!");
 			e.printStackTrace();
 		}
 	}
