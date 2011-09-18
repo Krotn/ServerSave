@@ -8,6 +8,7 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Properties;
 import java.util.logging.Logger;
+import org.bukkit.plugin.Plugin;
 
 /**
  * This class handles the properties for the ServerSave plugin.
@@ -24,22 +25,23 @@ public class SSPropertiesManager {
 	/**
 	 * Constructs a RentPropertiesManager using the default properties file name ("config.properties").
 	 */
-	public SSPropertiesManager(){
-		this(defaultPropertiesName);
+	public SSPropertiesManager(Plugin plugin){
+		this(defaultPropertiesName,plugin);
 	}
 	
 	/**
 	 * Constructs a RentPropertiesManager using the given properties file name.
 	 * @param propertiesName The name of the properties file to use.
 	 */
-	public SSPropertiesManager(String propertiesName){
+	public SSPropertiesManager(String propertiesName,Plugin plugin){
+	    SSDirectoryManager dirMan = new SSDirectoryManager(plugin);
 		this.propertiesName = propertiesName;
-		propFile = new File(SSDirectoryManager.getPathInDir(this.propertiesName));
+		propFile = new File(dirMan.getPathInDir(this.propertiesName));
 		prop = new Properties();
 		logManager = new SSLogManager(Logger.getLogger("Minecraft"));
 		if(!fileExists()){
-			if(!SSDirectoryManager.directoryExists()){
-				SSDirectoryManager.createDirectory();
+			if(!dirMan.directoryExists()){
+				dirMan.createDirectory();
 			}
 			setup();
 		}
