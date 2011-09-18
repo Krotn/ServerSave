@@ -1,22 +1,25 @@
 package me.krotn.ServerSave;
 
 import java.io.File;
+import org.bukkit.plugin.Plugin;
 
 public class SSDirectoryManager {
-
-	private static final String mainDirectory = "plugins"+File.separator+"ServerSave";
-	
+    private Plugin plugin;
+    
+    public SSDirectoryManager(Plugin plugin){
+        this.plugin = plugin;
+    }
 	
 	/**
 	 * This method creates the ServerSave plugin directory.<br/>
 	 * It does nothing if the directory already exists.
 	 */
-	public static void createDirectory(){
-		new File(mainDirectory).mkdir();
+	public void createDirectory(){
+		this.plugin.getDataFolder().mkdir();
 	}
 	
-	public static boolean directoryExists(){
-		return new File(mainDirectory).exists();
+	public boolean directoryExists(){
+		return this.plugin.getDataFolder().exists();
 	}
 	
 	/**
@@ -24,8 +27,8 @@ public class SSDirectoryManager {
 	 * It omits the final separator (eg. "plugins/Rent").
 	 * @return The main plugin directory.
 	 */
-	public static String getMainDirectory(){
-		return mainDirectory;
+	public String getMainDirectory(){
+		return this.plugin.getDataFolder().getAbsolutePath();
 	}
 	
 	/**
@@ -33,7 +36,7 @@ public class SSDirectoryManager {
 	 * @param fileName The name of the file to place in the directory.
 	 * @return A String path placing the file in the main plugin directory (eg. "plugins/Rent/filename").
 	 */
-	public static String getPathInDir(String fileName){
-		return mainDirectory+File.separator+fileName;
+	public String getPathInDir(String fileName){
+		return this.plugin.getDataFolder().getAbsolutePath()+File.separator+fileName;
 	}
 }
