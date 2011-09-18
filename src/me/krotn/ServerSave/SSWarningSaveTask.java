@@ -45,7 +45,9 @@ public class SSWarningSaveTask implements Runnable{
 		rescheduleSelf();
 		String warningText = propMan.getProperty("warningNotification");
 		String warningColorString = ChatColor.valueOf(propMan.getProperty("warningColor").toUpperCase()).toString();
-		this.plugin.getServer().broadcastMessage(warningColorString+warningText);
+		if(!warningText.isEmpty()){
+		    this.plugin.getServer().broadcastMessage(warningColorString+warningText);
+		}
 		Player[] players = this.plugin.getServer().getOnlinePlayers();
 		boolean outputToConsole = new Boolean(propMan.getProperty("printToConsole")).booleanValue();
 		if(outputToConsole && (players.length > 0)){
