@@ -70,18 +70,16 @@ public class ServerSaveTask implements Runnable{
 			//Prepare the end notification string.
 			chatColorString = ChatColor.valueOf(propMan.getProperty("endColor").toUpperCase()).toString();
 			String endNotification = propMan.getProperty("endNotification");
-			if(!endNotification.isEmpty()){
-				String endText = chatColorString+endNotification; //Final notification string
-				if(outputToConsole){
-					//Notification should print a log message.
-					this.plugin.getTaskManager().scheduleAsyncTaskDirect(new SSBasicBroadcastTask(endText,"Save complete!",this.plugin.getLogManager(),this.plugin.getServer()),ticks);
-				}
-				else{
-					//Notification should not print a log message.
-					this.plugin.getTaskManager().scheduleAsyncTaskDirect(new SSBasicBroadcastTask(endText,this.plugin.getServer()), ticks);
-				}
-				ticks++;
+			String endText = chatColorString+endNotification; //Final notification string
+			if(outputToConsole){
+				//Notification should print a log message.
+				this.plugin.getTaskManager().scheduleAsyncTaskDirect(new SSBasicBroadcastTask(endText,"Save complete!",this.plugin.getLogManager(),this.plugin.getServer()),ticks);
 			}
+			else{
+				//Notification should not print a log message.
+				this.plugin.getTaskManager().scheduleAsyncTaskDirect(new SSBasicBroadcastTask(endText,this.plugin.getServer()), ticks);
+			}
+			ticks++;
 		}catch(Exception e){
 			//Catch all exceptions.
 			plugin.getLogManager().warning("Problem setting up world save!");
