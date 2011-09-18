@@ -5,16 +5,22 @@ import java.util.logging.Logger;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class ServerSave extends JavaPlugin{
-	private SSLogManager logMan = new SSLogManager(Logger.getLogger("Minecraft"));
-	private SSPropertiesManager propMan = new SSPropertiesManager();
-	private SSTaskManager taskMan = null;
-	private ServerSaveTask saveTask = null;
-	private boolean useWarnings = false;
-	private SSWarningSaveTask warnTask = null;
+    private SSLogManager logMan;
+    private SSDirectoryManager dirMan;
+    private SSPropertiesManager propMan;
+    private SSTaskManager taskMan;
+    private ServerSaveTask saveTask;
+    private boolean useWarnings;
+    private SSWarningSaveTask warnTask;
 	
 	public void onEnable(){
-		if(!SSDirectoryManager.directoryExists()){
-			SSDirectoryManager.createDirectory();
+	    //Set variables
+	    logMan = new SSLogManager(Logger.getLogger("Minecraft"));
+	    dirMan = new SSDirectoryManager(this);
+	    propMan = new SSPropertiesManager(this);
+	    //Variables set! Let's go!
+		if(!dirMan.directoryExists()){
+			dirMan.createDirectory();
 		}
 		taskMan = new SSTaskManager(this,this.getServer().getScheduler());;
 		logMan.info("Save interval is: "+propMan.getProperty("saveFrequency")+" seconds.");
