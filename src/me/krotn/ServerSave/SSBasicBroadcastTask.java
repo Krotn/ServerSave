@@ -1,5 +1,6 @@
 package me.krotn.ServerSave;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Server;
 
 public class SSBasicBroadcastTask implements Runnable{
@@ -21,9 +22,18 @@ public class SSBasicBroadcastTask implements Runnable{
 		this.logMan = logMan;
 	}
 	
+	private boolean isChatColor(String toCheck){
+	    for(ChatColor c:ChatColor.values()){
+	        if(c.toString().equalsIgnoreCase(toCheck)){
+	            return true;
+	        }
+	    }
+	    return false;
+	}
+	
 	public void run(){
 		try{
-			if(!(this.text.isEmpty())){
+			if(!(this.text.isEmpty())&&!(isChatColor(this.text))){
 				this.server.broadcastMessage(this.text);
 			}
 			if(!(this.logText==null)){
